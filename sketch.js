@@ -13,7 +13,7 @@ let gui = {
   bottomLeftPhase: false,
   bottomRightAmp: 0,
   bottomRightPhase: false,
-  frequency: 0.2,
+  frequency: 0.1,
   backgroundColor: "rgb(0, 0,0)",
   displayPoints: false,
   displayLines: true,
@@ -44,24 +44,24 @@ let bottomLeftPhase;
 
 
 let gui_col = new dat.GUI();
-// let forces = gui_col.addFolder("Forces")
+let general = gui_col.addFolder("General")
 let shake = gui_col.addFolder("Shake")
 let display = gui_col.addFolder("Display")
 
 
-gui_col.add(gui, 'cols', 0, 100).name("Columns").step(1).onChange(
+general.add(gui, 'cols', 0, 100).name("Columns").step(1).onChange(
   function(){
     springs = [];
     startEverything();
   }
 );
-gui_col.add(gui, 'rows', 0, 100).name("Rows").step(1).onChange(
+general.add(gui, 'rows', 0, 100).name("Rows").step(1).onChange(
   function(){
     springs = [];
     startEverything();
   }
 );
-gui_col.add(gui, 'gravityX', -1, 1).name("Gravity - X").step(0.1).onChange(
+general.add(gui, 'gravityX', -1, 1).name("Gravity - X").step(0.1).onChange(
   function(){
   gravity = new Vec2D(gui.gravityX, gui.gravityY);
   gb = new GravityBehavior(gravity);
@@ -69,7 +69,7 @@ gui_col.add(gui, 'gravityX', -1, 1).name("Gravity - X").step(0.1).onChange(
   physics.addBehavior(gb);
   }
 );
-gui_col.add(gui, 'gravityY', -1, 1).name("Gravity - Y").step(0.1).onChange(
+general.add(gui, 'gravityY', -1, 1).name("Gravity - Y").step(0.1).onChange(
   function(){
   gravity = new Vec2D(gui.gravityX, gui.gravityY);
   gb = new GravityBehavior(gravity);
@@ -77,7 +77,7 @@ gui_col.add(gui, 'gravityY', -1, 1).name("Gravity - Y").step(0.1).onChange(
   physics.addBehavior(gb);
   }
 );
-gui_col.add(gui, 'springStrength', 0, 1.7).name("Spring Strength").step(0.1).onChange(
+general.add(gui, 'springStrength', 0, 1.7).name("Spring Strength").step(0.1).onChange(
   function(){
     for (let s of springs) {
       s.strength = gui.springStrength
